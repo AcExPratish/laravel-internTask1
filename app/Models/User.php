@@ -37,4 +37,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function module(){
+        return $this->hasOne(Module::class);
+    }
+
+    public function faculty(){
+        return $this->hasMany(Faculty::class);
+    }
+
+    //An eloquent mutator to hash the password
+    public function setPasswordAttribute($password){
+        $this->attributes['password'] = bcrypt($password);
+    }
+
 }

@@ -9,7 +9,7 @@
 
         <title>Laravel Intern : Task 1</title>
     </head>
-    <body>
+    <body class="container">
 
         @yield('content')
 

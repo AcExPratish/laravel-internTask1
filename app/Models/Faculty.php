@@ -9,7 +9,7 @@ class Faculty extends Model
 {
     use HasFactory;
 
-    public function faculty(){
+    public function module(){
         return $this->hasMany(Module::class);
     }
 

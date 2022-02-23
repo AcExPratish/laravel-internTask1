@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +17,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+})->name('/');
+
+Route::post('/lecturer/createProcedure', [UserController::class, 'create']);
+Route::get('/show', function (){
+    $users = User::all();
+    return view( 'show',[
+        'users' => $users
+    ]);
 });

@@ -9,7 +9,7 @@ class Module extends Model
 {
     use HasFactory;
 
-    public function module(){
+    public function faculty(){
         return $this->belongsTo(Faculty::class);
     }
 
