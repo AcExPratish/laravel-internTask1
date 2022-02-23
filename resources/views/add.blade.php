@@ -1,5 +1,10 @@
 @extends('layouts.app')
 @section('content')
+    <div class="row mt-5">
+        <div class="col-10 d-flex justify-content-end">
+            <a href="{{route('home')}}" class="btn btn-primary">Show All User's</a>
+        </div>
+    </div>
     <div class="row justify-content-center mt-5">
         <div class="col-8 bg-light p-5">
             <div class="row">
@@ -44,19 +49,27 @@
                         <div class="mb-3 col-6">
                             <label for="faculty" class="form-label">Select Faculty</label>
                             <select class="form-select form-select-md" aria-label=".form-select-md example" name="faculty" id="faculty" required>
-                                <option selected disabled>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @if(count($faculties))
+                                    <option selected disabled>Please select a faculty</option>
+                                    @foreach($faculties as $faculty)
+                                            <option value="{{$faculty->name}}">{{$faculty->name}}</option>
+                                        @endforeach
+                                @else
+                                    <option selected disabled>No Faculties Available</option>
+                                @endif
                             </select>
                         </div>
                         <div class="mb-3 col-6">
                             <label for="module" class="form-label">Select Module</label>
                             <select class="form-select form-select-md" aria-label=".form-select-md example" name="module" id="module" required>
-                                <option selected disabled>Open this select menu</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @if(count($modules))
+                                    <option selected disabled>Please select a module </option>
+                                    @foreach($modules as $module)
+                                        <option value="{{$module->name}}">{{$module->name}}</option>
+                                    @endforeach
+                                @else
+                                    <option selected disabled>No Modules Available</option>
+                                @endif
                             </select>
                         </div>
                     </div>
@@ -92,7 +105,6 @@
                     </div>
                     @if($errors->any())
                         <div class="row text-center bg-light border border-danger text-danger p-4 mt-5">
-
                             <ul style="list-style: none">
                                 @foreach($errors->all() as $error)
                                     <li>{{$error}}</li>

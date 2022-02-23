@@ -15,14 +15,10 @@ use App\Models\User;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('/');
+Route::get('/', [UserController::class, 'show'])->name('home');
 
-Route::post('/lecturer/createProcedure', [UserController::class, 'create']);
-Route::get('/show', function (){
-    $users = User::all();
-    return view( 'show',[
-        'users' => $users
-    ]);
+Route::prefix('lecturer')->group(function (){
+    Route::get('/createView', [UserController::class, 'createView']);
+    Route::post('/createProcedure', [UserController::class, 'create']);
+    Route::get('/show', [UserController::class, 'show']);
 });
