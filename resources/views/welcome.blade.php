@@ -28,10 +28,10 @@
                             <div class="mb-3 col-6">
                                 <label for="nationality" class="form-label">Nationality</label>
                                 <select class="form-select form-select-md mb-3" aria-label=".form-select-lg example" name="nationality" id="nationality" required>
-                                    <option selected disabled>Open this select menu</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
+                                    <option selected disabled>Please select your Nationality</option>
+                                    <option value="nepal">Nepal</option>
+                                    <option value="usa">USA</option>
+                                    <option value="uk">UK</option>
                                 </select>
                             </div>
                             <div class="mb-3 col-6">
