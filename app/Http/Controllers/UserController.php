@@ -6,6 +6,7 @@ use App\Models\Faculty;
 use App\Models\Module;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -17,12 +18,8 @@ class UserController extends Controller
 
     public function createView(Request $request)
     {
-        $modules = Module::all();
-        $faculties = Faculty::all();
-        return view('add', [
-            'modules' => $modules,
-            'faculties' => $faculties
-        ]);
+        $faculties['faculty'] = DB::table('faculties')->orderBy('name','asc')->get();
+        return view('add', $faculties);
     }
 
     public function create()
@@ -51,6 +48,17 @@ class UserController extends Controller
         return view( 'show',[
             'users' => $users
         ]);
+    }
+
+    public function getState(Request $request){
+        $fid = $request->post('fid');
+        $modules=DB::table('modules')->where('faculties_id',$fid)->orderBy('name','asc')->get();
+        $html = '<option selected disabled>Please select a faculty</option>';
+        foreach($modules as $module)
+        {
+            $html .= '<option value="'.$module->id.'">'.$module->name.'</option>';
+        }
+        echo $html;
     }
 
 //    public function edit($id)

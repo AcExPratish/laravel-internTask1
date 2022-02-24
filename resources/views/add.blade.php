@@ -49,27 +49,19 @@
                         <div class="mb-3 col-6">
                             <label for="faculty" class="form-label">Select Faculty</label>
                             <select class="form-select form-select-md" aria-label=".form-select-md example" name="faculty" id="faculty" required>
-                                @if(count($faculties))
-                                    <option selected disabled>Please select a faculty</option>
-                                    @foreach($faculties as $faculty)
-                                            <option value="{{$faculty->name}}">{{$faculty->name}}</option>
-                                        @endforeach
-                                @else
-                                    <option selected disabled>No Faculties Available</option>
-                                @endif
+                                <option selected disabled>Please select a faculty </option>
+                                    @if(count($faculty))
+                                        @foreach($faculty as $facult)
+                                                <option value="{{$facult->id}}">{{$facult->name}}</option>
+                                            @endforeach
+                                    @else
+                                        <option selected disabled>No Faculties Available</option>
+                                    @endif
                             </select>
                         </div>
                         <div class="mb-3 col-6">
                             <label for="module" class="form-label">Select Module</label>
                             <select class="form-select form-select-md" aria-label=".form-select-md example" name="module" id="module" required>
-                                @if(count($modules))
-                                    <option selected disabled>Please select a module </option>
-                                    @foreach($modules as $module)
-                                        <option value="{{$module->name}}">{{$module->name}}</option>
-                                    @endforeach
-                                @else
-                                    <option selected disabled>No Modules Available</option>
-                                @endif
                             </select>
                         </div>
                     </div>
@@ -116,4 +108,20 @@
             </div>
         </div>
     </div>
+@endsection
+@section('custom-js')
+    <script>
+        $(document).ready(function (){
+            $('#faculty').change(function (){
+                let fid = $(this).val();
+                $.ajax({
+                    url:"/lecturer/getState",
+                    type:"post",
+                    data:"fid="+fid+"&_token={{csrf_token()}}",
+                    success: function(result){
+                        $('#module').html(result);
+                    }});
+            });
+        });
+    </script>
 @endsection

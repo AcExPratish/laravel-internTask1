@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
+            $table->integer('faculties_id');
             $table->timestamps();
         });
     }

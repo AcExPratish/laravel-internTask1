@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,7 +16,9 @@ use App\Models\User;
 
 Route::get('/', [UserController::class, 'show'])->name('home');
 
+
 Route::prefix('lecturer')->group(function (){
+    Route::post('/getState', [UserController::class, 'getState']);
     Route::get('/createView', [UserController::class, 'createView']);
     Route::post('/createProcedure', [UserController::class, 'create']);
     Route::get('/show', [UserController::class, 'show']);

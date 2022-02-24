@@ -43,4 +43,13 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
+    public function faculty()
+    {
+        return $this->hasOne(Faculty::class);
+    }
+
+    public function module(){
+        return $this->hasOne(Module::class);
+    }
+
 }
